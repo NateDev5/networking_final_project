@@ -3,7 +3,7 @@ gcc = gcc
 out_file = shellcode
 c_file = shellcode.c
 
-GCC_FLAGS = -fno-stack-protector -O0 -z execstack -ggdb
+GCC_FLAGS = -fno-stack-protector -O0 -z execstack -ggdb -no-pie
 
 .PHONY: out
 

